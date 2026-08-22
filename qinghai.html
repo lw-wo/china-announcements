@@ -105,6 +105,17 @@
       });
       ind.style.display = found ? '' : 'none';   /* 行业保持折叠, 仅控制显隐 */
     });
+    /* 公司汇总区同步参与搜索+省份筛选 */
+    document.querySelectorAll('#compList .zy-comp').forEach(comp => {
+      const text = comp.textContent.toLowerCase();
+      const provHit = !p || comp.dataset.province === p;
+      const kwHit = !q || text.includes(q);
+      const show = provHit && kwHit;
+      comp.style.display = show ? '' : 'none';
+      if (show) comp.classList.add('open');
+    });
+    /* 无筛选时恢复数量下拉限制 */
+    if (!q && !p) applyCompShow();
   }
   kw.addEventListener('input', applyFilter);
   if (pv) pv.addEventListener('change', applyFilter);
