@@ -122,8 +122,7 @@
         const provHit = !p || comp.dataset.province === p;
         const kwHit = !q || text.includes(q);
         const show = provHit && kwHit;
-        comp.classList.toggle('open', show && !!q);   /* 仅文字搜索时自动展开; 纯省份筛选保持折叠 */
-        comp.style.display = show ? '' : 'none';       /* 不匹配的完全屏蔽 */
+        comp.style.display = show ? '' : 'none';       /* 搜索/筛选只显示公司行, 不自动展开, 点击才展开 */
         if (show) found = true;
       });
       ind.style.display = found ? '' : 'none';   /* 行业保持折叠, 仅控制显隐 */
@@ -134,8 +133,7 @@
       const provHit = !p || comp.dataset.province === p;
       const kwHit = !q || text.includes(q);
       const show = provHit && kwHit;
-      comp.style.display = show ? '' : 'none';
-      if (show) comp.classList.add('open');
+      comp.style.display = show ? '' : 'none';   /* 只显示公司行, 不自动展开 */
     });
     /* 无筛选时恢复数量下拉限制 */
     if (!q && !p) applyCompShow();
